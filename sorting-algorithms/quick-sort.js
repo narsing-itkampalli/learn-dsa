@@ -1,16 +1,16 @@
 function partition(array, start, end) {
     const pivot = array[end];
-    let smallerElementIndex = start - 1;
+    let smallerElementIndex = start;
 
-    for (let current = start; current < end; current++) {
-        if (array[current] <= pivot) {
+    for (let i = start; i < end; i++) {
+        if (array[i] <= pivot) {
+            [array[smallerElementIndex], array[i]] = [array[i], array[smallerElementIndex]];
             smallerElementIndex++;
-            [array[smallerElementIndex], array[current]] = [array[current], array[smallerElementIndex]];
         }
     }
 
-    [array[smallerElementIndex + 1], array[end]] = [array[end], array[smallerElementIndex + 1]];
-    return smallerElementIndex + 1;
+    [array[smallerElementIndex], array[end]] = [array[end], array[smallerElementIndex]];
+    return smallerElementIndex;
 }
 
 function quickSort(array, start = 0, end = array.length - 1) {
