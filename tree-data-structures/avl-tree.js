@@ -61,26 +61,23 @@ class AVLTree {
 
         const balance = this.getBalance(node);
 
-        // Left Left Case (LL)
-        if (balance > 1 && value < node.left.value) {
-            return this.rotateRight(node);
+        
+        if(balance > 1) { // Left
+            if(this.getBalance(node.left) >= 0) { // Left Left
+                return this.rotateRight(node);
+            }else { // Left Right
+                node.left = this.rotateLeft(node.left);
+                return this.rotateRight(node);
+            }
         }
 
-        // Right Right Case (RR)
-        if (balance < -1 && value > node.right.value) {
-            return this.rotateLeft(node);
-        }
-
-        // Left Right Case (LR)
-        if (balance > 1 && value > node.left.value) {
-            node.left = this.rotateLeft(node.left);
-            return this.rotateRight(node);
-        }
-
-        // Right Left Case (RL)
-        if (balance < -1 && value < node.right.value) {
-            node.right = this.rotateRight(node.right);
-            return this.rotateLeft(node);
+        if(balance < -1) { // Right
+            if(this.getBalance(node.right) <= 0) { // Right Right
+                return this.rotateLeft(node);
+            }else { // Right Left
+                node.right = this.rotateRight(node.right);
+                return this.rotateLeft(node);
+            }
         }
 
         return node;
@@ -90,12 +87,74 @@ class AVLTree {
         this.root = this.insert(this.root, value);
     }
 
-    inOrderTraversal(node = this.root) {
-        if (node) {
-            this.inOrderTraversal(node.left);
-            console.log(node.value);
-            this.inOrderTraversal(node.right);
+    toSortedArray() {
+        const result = [];
+
+        const inOrderTraversal = (node) => {
+            if(node == null) return;
+
+            inOrderTraversal(node.left);
+            result.push(node.value);
+            inOrderTraversal(node.right);
         }
+
+        inOrderTraversal(this.root);
+
+        return result;
+    }
+
+    getMinValueNode(node) {
+        const current = node;
+        while(current.left) current = current.left;
+        return current;
+    }
+
+    delete(node, value) {
+        if(!node) return node;
+
+        if(value < node.value) {
+            node.left = this.delete(node.left, value);
+        }else if(value > node.value) {
+            node.right = this.delete(node.right, value);
+        }else {
+            if(!node.right) return node.left;
+            if(!node.left) return node.right;
+
+            const minValueNode = this.getMinValueNode(node.right);
+            node.value = minValueNode.value;
+            node.right = this.delete(node.right, minValueNode.value);
+        }
+
+        node.height = 1 + Math.max(this.getHeight(node.left), this.getHeight(node.right));
+        const balance = this.getBalance(node);
+
+        if(balance > 1) { // Left
+            if(this.getBalance(node.left) >= 0) { // Left Left
+                return this.rotateRight(node);
+            }else { // Left Right
+                node.left = this.rotateLeft(node.left);
+                return this.rotateRight(node);
+            }
+        }
+
+        if(balance < -1) { // Right
+            if(this.getBalance(node.right) <= 0) { // Right Right
+                return this.rotateLeft(node);
+            }else { // Right Left
+                node.right = this.rotateRight(node.right);
+                return this.rotateLeft(node);
+            }
+        }
+
+        return node;
+    }
+
+    deleteValue(value) {
+        this.root = this.delete(this.root, value);
+    }
+
+    print() {
+        console.log(JSON.stringify(this.root, null, 4));
     }
 }
 
@@ -111,6 +170,9 @@ tree.insertValue(50); // RR case
 tree.insertValue(25); // LR case
 tree.insertValue(45); // RL case
 
-tree.inOrderTraversal();
+console.log(tree.toSortedArray());
+tree.print();
 
-console.log(tree.root);
+tree.deleteValue(20);
+console.log(tree.toSortedArray());
+tree.print();
