@@ -55,6 +55,9 @@ function maxDifference(s, k) {
     return maxDiff;
 }
 
-testcases.forEach(([s, k]) => {
-    console.log(maxDifference(s, k));
+let time = new Date().getTime();
+testcases.forEach(testcase => {
+    console.log(maxDifference(...testcase));
 });
+
+console.log({time: `${new Date().getTime() - time}ms`})
