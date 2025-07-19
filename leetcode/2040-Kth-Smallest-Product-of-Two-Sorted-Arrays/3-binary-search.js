@@ -3,7 +3,7 @@ import testcases from './testcases.js'
 var kthSmallestProduct = function(nums1, nums2, k) {
     function countPairs(mid) {
         let count = 0;
-        for (let a of nums1) {
+        for (let a of nums1) { // O(n)
             if (a === 0) {
                 if (mid >= 0) count += nums2.length;
             } else if (a > 0) {
