@@ -2,7 +2,7 @@
 
 This project is a personal collection of solved Data Structures & Algorithms (DSA) problems — organized, testable, and easy to maintain.
 
-For full `problems` folder structure, check: [/problems](./problems/readme.md)
+For full `problems` folder structure, check: [/problems](./problems)
 
 
 ## ⚙️ Setup
