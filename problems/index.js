@@ -7,16 +7,21 @@ const currentDir = dirname(currentFile);
 
 export async function runTest(func) {
     const { filePath } = getCallerInfo(new Error().stack);
-    const testcasesPath = path.relative(currentDir, dirname(fileURLToPath(filePath)))+'/testcases.js';
+    const testcasesPath = path.relative(currentDir, dirname(fileURLToPath(filePath))) + '/testcases.js';
 
-    const { default: testcases } = await import('./'+testcasesPath);
+    const { default: testcases } = await import('./' + testcasesPath);
 
-    let start = new Date().getTime();
+    const start = new Date().getTime();
+    const startMemory = process.memoryUsage().heapUsed;
     testcases.forEach(testcase => {
         console.log(func(...testcase));
     });
 
-    console.log(`Time: ${new Date().getTime() - start}ms`);
+    global.gc?.();
+    const endMemory = process.memoryUsage().heapUsed;
+
+    console.log(`Time taken: ${new Date().getTime() - start}ms`);
+    console.log(`Memory used: ${formatBytes(endMemory - startMemory)}`);
 }
 
 function getCallerInfo(stack) {
@@ -30,5 +35,15 @@ function getCallerInfo(stack) {
         return { filePath, line: Number(line), column: Number(column) };
     } else {
         return null;
+    }
+}
+
+function formatBytes(bytes) {
+    if (bytes < 1024) {
+        return `${bytes} Bytes`;
+    } else if (bytes / 1024 < 1024) {
+        return `${(bytes / 1024).toFixed(2)} KB`;
+    } else {
+        return `${(bytes / 1024 / 1024).toFixed(2)} MB`;
     }
 }
