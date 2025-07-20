@@ -38,3 +38,22 @@
 * `path` temp arrays → reused per iteration, negligible
 
 ✅ **Total Space:** `O(n * L)`
+
+## 💡 Approach 2: Optimized Trie
+
+`optimized-trie.js`
+
+* Removed sorting → saved **O(n log n)** time.
+* Removed separate `has()` check → insertion now does both check & insert in one pass.
+* No `res` array during insertion → final output collected via DFS traversal.
+* Stops early if a parent folder already exists.
+
+### ⏱️ Time & Space Comparison
+
+| Step            | Before (`FolderSystem`) | Now (`FolderTrie`)       |
+| --------------- | ----------------------- | ------------------------ |
+| Sort folders    | `O(n log n)`            | ❌ **Removed**            |
+| Check + Insert  | `O(n × L)` (separate)   | ✅ `O(n × L)` (merged)    |
+| Collect output  | During insert (`res[]`) | DFS after insert         |
+| **Total Time**  | `O(n log n + n × L)`    | ✅ **`O(n × L)`**         |
+| **Total Space** | `O(n × L)`              | ↔️ **Same** (`O(n × L)`) |
