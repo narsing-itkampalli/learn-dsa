@@ -16,3 +16,14 @@ A **fancy string** is a string where **no three consecutive characters are equal
 * **Time Complexity:** O(n²) — `res += s[i]` creates a new string every time (costly for large `n`)
 
 * **Space Complexity:** O(n) — extra space used for result string
+
+## Approach 2: Greedy In-Place Edit on Array
+`greedy-array.js`
+
+* **Idea:** Use the input array itself to mark unnecessary characters by replacing them with `''`. Track last valid index to check for three consecutive characters.
+
+* **Efficient and passes all test cases.**
+
+* **Time Complexity:** O(n) — single pass through the array
+
+* **Space Complexity:** O(n) — due to `.split()` and `.join()` operations
