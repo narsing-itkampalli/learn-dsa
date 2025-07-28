@@ -3,7 +3,7 @@ export function ListNode(val, next) {
     this.next = (next === undefined ? null : next)
 }
 
-export function arrayToLinkedList(arr) {
+export function arrayToLinkedList(arr, tail = null) {
     if(arr.length === 0) return null;
     const root = new ListNode(arr[0], null);
     let current = root;
@@ -12,6 +12,8 @@ export function arrayToLinkedList(arr) {
         current.next = new ListNode(arr[i], null);
         current = current.next;
     }
+
+    current.next = tail;
 
     return root;
 }
