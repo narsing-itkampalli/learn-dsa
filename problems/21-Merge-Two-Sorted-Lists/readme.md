@@ -3,6 +3,7 @@
 https://leetcode.com/problems/merge-two-sorted-lists
 
 ## 🧠 Approach 1: In-Place Iterative Merge
+`./merge-sort.js`
 
 This solution merges two sorted linked lists **in-place** without using extra space or creating new nodes. The idea is to traverse the two lists and attach nodes from the second list (`rest`) into the correct position within the first list (`list1` or `list2`), depending on whichever has the smaller starting value.
 
