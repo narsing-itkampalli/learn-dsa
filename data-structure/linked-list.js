@@ -15,3 +15,15 @@ export function arrayToLinkedList(arr) {
 
     return root;
 }
+
+export function linkedListToArray(head) {
+    if(!head) return head;
+    const res = [];
+
+    while(head) {
+        res.push(head.val);
+        head = head.next;
+    }
+
+    return res;
+}
