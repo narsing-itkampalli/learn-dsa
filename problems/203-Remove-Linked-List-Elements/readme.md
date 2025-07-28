@@ -1,6 +1,7 @@
 # 203. Remove Linked List Elements
 
 ## Approach 1: Two Pointers (Previous & Current)
+`./solution.js`
 
 We use two pointers to go through the linked list:
 
