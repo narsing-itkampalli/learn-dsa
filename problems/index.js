@@ -5,23 +5,30 @@ import { dirname } from 'path';
 const currentFile = fileURLToPath(import.meta.url);
 const currentDir = dirname(currentFile);
 
-export async function runTest(func) {
+export async function runTest(func, ...mapFuncList) {
     const { filePath } = getCallerInfo(new Error().stack);
     const testcasesPath = path.relative(currentDir, dirname(fileURLToPath(filePath))) + '/testcases.js';
 
     const { default: testcases } = await import('./' + testcasesPath);
 
-    const start = new Date().getTime();
-    const startMemory = process.memoryUsage().heapUsed;
+    let maxTime = 0;
+    let maxSpace = 0;
+
     testcases.forEach(testcase => {
-        console.log(func(...testcase));
+        const start = new Date().getTime();
+        const startMemory = process.memoryUsage().heapUsed;
+        let output = func(...testcase);
+        global.gc?.();
+        maxTime = Math.max(maxTime, new Date().getTime() - start);
+        maxSpace = Math.max(maxSpace, process.memoryUsage().heapUsed - startMemory);
+        mapFuncList.forEach(mapFunc => {
+            output = mapFunc(output);
+        });
+        console.log(output);
     });
 
-    global.gc?.();
-    const endMemory = process.memoryUsage().heapUsed;
-
-    console.log(`Time taken: ${new Date().getTime() - start}ms`);
-    console.log(`Memory used: ${formatBytes(endMemory - startMemory)}`);
+    console.log(`Time taken: ${maxTime}ms`);
+    console.log(`Memory used: ${formatBytes(maxSpace)}`);
 }
 
 function getCallerInfo(stack) {
