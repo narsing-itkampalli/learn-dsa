@@ -34,3 +34,36 @@
 * **Space Complexity:** `O(1)`
 
   * In-place operations, no extra data structures used.
+
+---
+
+## Approach 2: Fast-Slow Pointer with Length Inference
+`./remove-nth-from-end-fast-slow.js`
+
+### Intuition
+
+Instead of traversing the entire list to calculate its length, or using two pointers spaced `n` apart, this approach infers the total length using the **fast-slow pointer technique** (commonly used to find the middle of a list).
+
+Then, the position from the **start** is calculated from the `n`-th from end. Finally, we traverse and remove the target node in a single pass from the correct position.
+
+### Explanation
+
+1. Use two pointers:
+
+   * `slow` moves one step at a time
+   * `fast` moves two steps at a time
+2. Keep track of how many steps `slow` has taken until `fast` reaches the end.
+3. Based on the final values and whether the list length is even or odd, estimate the **total number of nodes**.
+4. Convert the `n`-th node from the end to the equivalent position from the **start**.
+5. Traverse the list (starting from either `head` or `slow`) and remove the node.
+
+### Time and Space Complexity
+
+* **Time Complexity:** `O(n)`
+
+  * One pass to reach the midpoint and infer length
+  * One additional pass (partial) to remove the node
+
+* **Space Complexity:** `O(1)`
+
+  * No extra memory used, just pointers
