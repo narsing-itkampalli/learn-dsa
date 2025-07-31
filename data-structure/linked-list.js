@@ -19,7 +19,7 @@ export function arrayToLinkedList(arr, tail = null) {
 }
 
 export function linkedListToArray(head) {
-    if(!head) return head;
+    if(!head) return [];
     const res = [];
 
     while(head) {
