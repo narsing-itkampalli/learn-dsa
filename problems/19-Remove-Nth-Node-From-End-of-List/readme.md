@@ -67,3 +67,36 @@ Then, the position from the **start** is calculated from the `n`-th from end. Fi
 * **Space Complexity:** `O(1)`
 
   * No extra memory used, just pointers
+
+---
+
+## Approach 3: One-Pass Fixed Gap (Two-Pointer)
+`./one-pass-fixed-gap.js`
+
+### Intuition
+
+* Use two pointers, `fast` and `curr`, with `fast` starting `n` nodes ahead.
+* Once `fast` reaches the end, `curr` will be at the node to remove.
+* Keep a `prev` pointer to help remove the `curr` node cleanly.
+
+### Explanation
+
+1. Move `fast` ahead by `n - 1` steps to create a gap of `n` between `curr` and `fast`.
+2. Traverse the list with both `fast` and `curr` until `fast` reaches the last node.
+3. If `curr` is at the head and we’re removing the first node from the end, update the head.
+4. Otherwise, skip the `curr` node by setting `prev.next = curr.next`.
+
+### Time and Space Complexity
+
+* **Time Complexity:** `O(n)`
+
+  * Single traversal of the list.
+
+* **Space Complexity:** `O(1)`
+
+  * Uses only pointers.
+
+### Notes
+
+* This is the optimal and widely-accepted solution.
+* You avoided the dummy node and still handled edge cases like removing the head.
