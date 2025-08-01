@@ -9,7 +9,7 @@ if (!problemName) {
     process.exit(1);
 }
 
-const folderName = problemName.replace('.', '').replaceAll(' ', '-');
+const folderName = problemName.replace('.', '').replaceAll(' ', '-').replaceAll(/[\'\"]/g, '');
 const basePath = path.join(process.cwd(), 'problems', folderName);
 
 if (fs.existsSync(basePath)) {
