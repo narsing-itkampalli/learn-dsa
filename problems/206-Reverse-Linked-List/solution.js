@@ -1,4 +1,4 @@
-import { linkedListToArray } from "../../data-structures/linked-list.js";
+import LinkedList from "../../data-structures/linked-list.js";
 import { runTest } from "../index.js";
 
 /**
@@ -19,4 +19,4 @@ var reverseList = function(head) {
     return prev;
 };
 
-runTest(reverseList, linkedListToArray);
+runTest(reverseList, LinkedList.toArray);

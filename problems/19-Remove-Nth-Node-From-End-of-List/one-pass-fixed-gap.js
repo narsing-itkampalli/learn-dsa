@@ -1,4 +1,4 @@
-import { linkedListToArray } from "../../data-structures/linked-list.js";
+import LinkedList from "../../data-structures/linked-list.js";
 import { runTest } from "../index.js";
 
 /**
@@ -30,4 +30,4 @@ var removeNthFromEnd = function (head, n) {
     return head;
 };
 
-runTest(removeNthFromEnd, linkedListToArray);
+runTest(removeNthFromEnd, LinkedList.toArray);

@@ -1,4 +1,4 @@
-import { linkedListToArray } from "../../data-structures/linked-list.js";
+import LinkedList from "../../data-structures/linked-list.js";
 import { runTest } from "../index.js";
 
 /**
@@ -43,4 +43,4 @@ function getNextDistinctValNode(head) {
     return null;
 }
 
-runTest(deleteDuplicates, linkedListToArray);
+runTest(deleteDuplicates, LinkedList.toArray);

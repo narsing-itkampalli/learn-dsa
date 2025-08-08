@@ -1,4 +1,4 @@
-import { linkedListToArray } from "../../data-structures/linked-list.js";
+import LinkedList from "../../data-structures/linked-list.js";
 import { runTest } from "../index.js";
 
 /**
@@ -37,4 +37,4 @@ var swapPairs = function(head) {
     return newHead;
 };
 
-runTest(swapPairs, linkedListToArray);
+runTest(swapPairs, LinkedList.toArray);

@@ -1,31 +1,39 @@
-export function ListNode(val, next) {
-    this.val = (val === undefined ? 0 : val)
-    this.next = (next === undefined ? null : next)
+class ListNode {
+    constructor(val, next) {
+        this.val = (val === undefined ? 0 : val);
+        this.next = (next === undefined ? null : next);
+    }
 }
 
-export function arrayToLinkedList(arr, tail = null) {
-    if(arr.length === 0) return null;
-    const root = new ListNode(arr[0], null);
-    let current = root;
-
-    for(let i = 1; i < arr.length; i++) {
-        current.next = new ListNode(arr[i], null);
-        current = current.next;
+export default class LinkedList {
+    static createNode(val, next) {
+        return new ListNode(val, next);
     }
 
-    current.next = tail;
+    static fromArray(arr, tail = null) {
+        if (arr.length === 0) return null;
+        const root = LinkedList.createNode(arr[0], null);
+        let current = root;
 
-    return root;
-}
+        for (let i = 1; i < arr.length; i++) {
+            current.next = LinkedList.createNode(arr[i], null);
+            current = current.next;
+        }
 
-export function linkedListToArray(head) {
-    if(!head) return [];
-    const res = [];
+        current.next = tail;
 
-    while(head) {
-        res.push(head.val);
-        head = head.next;
+        return root;
     }
 
-    return res;
+    static toArray(head) {
+        if (!head) return [];
+        const res = [];
+
+        while (head) {
+            res.push(head.val);
+            head = head.next;
+        }
+
+        return res;
+    }
 }

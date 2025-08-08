@@ -1,4 +1,4 @@
-import { linkedListToArray } from "../../data-structures/linked-list.js";
+import LinkedList from "../../data-structures/linked-list.js";
 import { runTest } from "../index.js";
 
 /**
@@ -30,4 +30,4 @@ var mergeTwoLists = function(list1, list2) {
     return root;
 };
 
-runTest(mergeTwoLists, linkedListToArray);
+runTest(mergeTwoLists, LinkedList.toArray);

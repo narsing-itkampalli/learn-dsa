@@ -1,4 +1,4 @@
-import { arrayToLinkedList } from "../../data-structures/linked-list.js";
+import LinkedList from "../../data-structures/linked-list.js";
 
 export default [
     [
@@ -23,10 +23,10 @@ export default [
         2
     ]
 ].map(([_, listA, listB, skipA, skipB]) => {
-    const intersection = arrayToLinkedList(listA.slice(skipA));
+    const intersection = LinkedList.fromArray(listA.slice(skipA));
 
     return [
-        arrayToLinkedList(listA.slice(0, skipA), intersection),
-        arrayToLinkedList(listB.slice(0, skipB), intersection)
+        LinkedList.fromArray(listA.slice(0, skipA), intersection),
+        LinkedList.fromArray(listB.slice(0, skipB), intersection)
     ];
 })

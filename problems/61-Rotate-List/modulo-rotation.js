@@ -1,4 +1,4 @@
-import { linkedListToArray } from "../../data-structures/linked-list.js";
+import LinkedList from "../../data-structures/linked-list.js";
 import { runTest } from "../index.js";
 
 /**
@@ -51,4 +51,4 @@ function count(head) {
     return i;
 }
 
-runTest(rotateRight, linkedListToArray);
+runTest(rotateRight, LinkedList.toArray);

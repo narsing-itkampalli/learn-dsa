@@ -1,4 +1,4 @@
-import { linkedListToArray } from "../../data-structures/linked-list.js";
+import LinkedList from "../../data-structures/linked-list.js";
 import { runTest } from "../index.js";
 
 /**
@@ -55,4 +55,4 @@ function insert(insertTail, head, node) {
     return node;
 }
 
-runTest(partition, linkedListToArray);
+runTest(partition, LinkedList.toArray);

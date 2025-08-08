@@ -1,4 +1,4 @@
-import { arrayToLinkedList } from "../../data-structures/linked-list.js";
+import LinkedList from "../../data-structures/linked-list.js";
 
 export default [
     [
@@ -13,4 +13,4 @@ export default [
         [7,7,7,7],
         7
     ]
-].map(([head, val]) => ([arrayToLinkedList(head), val]));
+].map(([head, val]) => ([LinkedList.fromArray(head), val]));

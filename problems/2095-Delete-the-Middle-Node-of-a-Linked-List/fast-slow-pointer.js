@@ -1,4 +1,4 @@
-import { linkedListToArray } from "../../data-structures/linked-list.js";
+import LinkedList from "../../data-structures/linked-list.js";
 import { runTest } from "../index.js";
 
 /**
@@ -23,4 +23,4 @@ var deleteMiddle = function(head) {
     return head;
 };
 
-runTest(deleteMiddle, linkedListToArray);
+runTest(deleteMiddle, LinkedList.toArray);
