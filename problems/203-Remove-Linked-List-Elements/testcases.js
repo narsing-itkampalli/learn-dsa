@@ -1,4 +1,4 @@
-import { arrayToLinkedList } from "../../data-structure/linked-list.js";
+import { arrayToLinkedList } from "../../data-structures/linked-list.js";
 
 export default [
     [
