@@ -36,4 +36,40 @@ export default class LinkedList {
 
         return res;
     }
+
+    static reverse(start, end = null) {
+        let prev = null;
+        let curr = start;
+
+        while (prev !== end && curr) {
+            const next = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = next;
+        }
+
+        return {
+            start: end,
+            end: start
+        };
+    }
+
+    static removeNode(head, node) {
+        let previous = null;
+        let current = head;
+
+        while (current) {
+            const next = current.next;
+            if (current === node) {
+                if (previous) previous.next = next;
+                else head = next;
+                break;
+            } else {
+                previous = current;
+                current = next;
+            }
+        }
+
+        return head;
+    }
 }
