@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "add-problem": "node ./commands/add-problem.js"
+    "add-problem": "node ./commands/add-problem.js",
+    "ap": "node ./commands/add-problem.js"
   },
   "keywords": [],
   "author": "",
