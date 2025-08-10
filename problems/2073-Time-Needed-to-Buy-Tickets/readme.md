@@ -29,3 +29,19 @@ We simulate the ticket buying process exactly as described:
 * **Space Complexity:** `O(1)`
 
   * Operates directly on the `tickets` array without extra storage.
+
+## Approach 2: Optimized Single Pass
+`./2-solution.js`
+
+This approach avoids simulating each ticket purchase and instead calculates the total time directly in a **single pass**.
+We iterate through the `tickets` array once and sum up the number of tickets each person will buy before the `k`-th person gets their last ticket.
+
+**Key Idea**
+
+* For people **before or at** position `k`, they can buy up to `targetTickets` tickets.
+* For people **after** position `k`, they can buy at most `targetTickets - 1` tickets because the loop ends immediately when person `k` finishes.
+
+### Time and Space Complexity
+
+* **Time Complexity:** `O(n)` — Single iteration over the array.
+* **Space Complexity:** `O(1)` — No extra data structures used.
