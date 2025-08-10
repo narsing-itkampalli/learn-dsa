@@ -1,0 +1,6 @@
+export default [
+    [
+        ["RecentCounter","ping","ping","ping","ping"],
+        [[],[1],[100],[3001],[3002]]
+    ]
+]
