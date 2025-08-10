@@ -26,6 +26,12 @@ fs.writeFileSync(
     `export default [\n    \n]`
 );
 
+// Create 1-solution.js
+fs.writeFileSync(
+    path.join(basePath, '1-solution.js'),
+    `import { runTest } from "../index.js";\n\n`
+);
+
 // Create readme.md
 fs.writeFileSync(
     path.join(basePath, 'readme.md'),
@@ -34,6 +40,7 @@ fs.writeFileSync(
 [Link]
 
 ## Approach 1: [Approach Name]
+\`./1-solution.js\`
 <!-- e.g., Bit Manipulation, Hash Map, Two Pointers, Sliding Window -->
 
 ### Explanation
