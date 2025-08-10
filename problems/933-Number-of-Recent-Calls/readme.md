@@ -3,7 +3,7 @@
 https://leetcode.com/problems/number-of-recent-calls
 
 ## Approach 1: Backward Range Check with Array
-`./solution.js`
+`./1-solution.js`
 
 ### Explanation
 
@@ -31,3 +31,26 @@ This works because:
 * **Space Complexity:** `O(n)`
 
   * `n` = total number of requests since the start of the program (old timestamps are not removed).
+
+## Approach 2: Queue-Based Sliding Window
+`./2-queue-based-sliding-window.js`
+
+### Explanation
+
+Instead of keeping all timestamps forever, we only store the ones that fall inside the last 3000 ms.
+When `ping(t)` is called:
+
+1. Append `t` to `requests`.
+2. Remove timestamps from the front of the array while they are less than `t - 3000`.
+3. Return the current length of the array (which equals the number of recent requests).
+
+This ensures the array always contains only the valid "window" of recent requests.
+
+### Time and Space Complexity
+
+* **Time Complexity:** `O(1)` amortized —
+
+  * Each request is added once and removed once.
+* **Space Complexity:** `O(k)` —
+
+  * Only stores requests from the last 3000 ms.
