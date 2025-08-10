@@ -15,6 +15,7 @@ export async function runTest(func, ...mapFuncList) {
     let maxSpace = 0;
 
     testcases.forEach(testcase => {
+        testcase = Array.isArray(testcase) ? testcase : Object.values(testcase);
         const start = new Date().getTime();
         const startMemory = process.memoryUsage().heapUsed;
         let output = func(...testcase);
