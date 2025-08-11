@@ -25,3 +25,24 @@ https://leetcode.com/problems/range-product-queries-of-powers
 * **Space Complexity:** `O(log n)`
 
   * Only the list of powers is stored, which at most has `log₂(n)` elements.
+
+  
+## Approach 2: Prefix Product with Modular Inverse
+`./2-solution.js`
+
+### Explanation
+1. Extract all powers of two from set bits in `n` using bitwise operations.
+2. Store them as `BigInt` values for safe multiplication with large numbers.
+3. Build a prefix product array modulo `1_000_000_007n`.
+4. For a query `[left, right]`, use:
+   - `prefix[right]` for the product up to `right`.
+   - Multiply by the modular inverse of `prefix[left - 1]` if `left > 0`.
+5. This ensures each query is answered in `O(log M)` due to modular exponentiation for inverse calculation.
+
+### Time and Space Complexity
+
+* **Time Complexity:**  
+  - Preprocessing: `O(k)`  
+  - Each query: `O(log MOD)` for modular inverse.
+* **Space Complexity:** `O(k)`  
+  * For storing powers and prefix products.
