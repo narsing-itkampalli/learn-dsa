@@ -22,3 +22,32 @@ We simulate the circular queue behavior using a fixed-size array (`this.queue`) 
   * `deQueue` → **O(n)** (because `Array.shift()` is O(n) in JavaScript)
 
 * **Space Complexity:** `O(k)` — For storing up to `k` elements.
+
+## Approach 2: Circular Array with Modular Indexing
+`./2-true-cicular-queue.js`
+
+### Explanation
+
+1. Maintain a **fixed-size array** of length `k` to store queue elements.
+2. Track two values:
+
+   * `head` → index of the front element.
+   * `count` → current number of elements in the queue.
+3. **Enqueue**: Place the new element at `(head + count) % size` and increment `count`.
+4. **Dequeue**: Move `head` forward by `(head + 1) % size` and decrement `count`.
+5. **Front** and **Rear**:
+
+   * Front is at `queue[head]`.
+   * Rear is at `(head + count - 1) % size`.
+6. **isEmpty** → `count === 0`, **isFull** → `count === size`.
+7. This design avoids shifting elements and achieves O(1) operations.
+
+### Time and Space Complexity
+
+* **Time Complexity:** `O(1)`
+
+  * All operations (enqueue, dequeue, front, rear, isEmpty, isFull) use direct index access and modular arithmetic.
+
+* **Space Complexity:** `O(k)`
+
+  * A fixed array of size `k` is used to store elements, plus O(1) variables for `head` and `count`.
