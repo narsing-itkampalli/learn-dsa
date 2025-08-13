@@ -1,0 +1,33 @@
+export default [
+    [
+        [
+            "MyCircularDeque",
+            "insertLast",
+            "insertLast",
+            "insertFront",
+            "insertFront",
+            "getRear",
+            "isFull",
+            "deleteLast",
+            "insertFront",
+            "getFront"
+        ],
+        [
+            [3],
+            [1],
+            [2],
+            [3],
+            [4],
+            [],
+            [],
+            [],
+            [4],
+            []
+        ]
+    ],
+    [
+        ["MyCircularDeque","insertFront","deleteLast","getRear","getFront","getFront","deleteFront","insertFront","insertLast","insertFront","getFront","insertFront"],
+        [[4],[9],[],[],[],[],[],[6],[5],[9],[],[6]]
+        // Expected output: [null,true,true,-1,-1,-1,false,true,true,true,9,true]
+    ]
+]
