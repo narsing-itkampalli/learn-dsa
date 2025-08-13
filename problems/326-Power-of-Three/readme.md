@@ -51,3 +51,17 @@ This approach uses the fact that the largest power of three that fits in a 32-bi
 ### Time and Space Complexity
 * **Time Complexity:** `O(1)` — single modulus operation.
 * **Space Complexity:** `O(1)` — uses constant extra space.
+
+## Approach 3: Iterative Division (Divide while divisible by 3)
+`./3-solution.js`
+
+### Explanation
+
+* First check `n < 1` to handle negatives and zero.
+* While `n` is divisible by `3`, divide it by `3`.
+* If the final value is `1`, it’s a power of three.
+
+### Time and Space Complexity
+
+* **Time Complexity:** `O(log₃ n)` — only divides when divisible by 3.
+* **Time Complexity:** `O(1)`
