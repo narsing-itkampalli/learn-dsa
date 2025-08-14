@@ -1,5 +1,6 @@
 import fs from 'fs';
 import path from 'path';
+import { exec } from 'child_process';
 
 const args = process.argv.slice(2);
 const problemName = args.join(' ');
@@ -9,7 +10,10 @@ if (!problemName) {
     process.exit(1);
 }
 
-const folderName = problemName.replace('.', '').replaceAll(' ', '-').replaceAll(/[\'\"]/g, '');
+const folderName = problemName
+    .replace('.', '')
+    .replaceAll(' ', '-')
+    .replaceAll(/[\'\"]/g, '');
 const basePath = path.join(process.cwd(), 'problems', folderName);
 
 if (fs.existsSync(basePath)) {
@@ -27,8 +31,9 @@ fs.writeFileSync(
 );
 
 // Create 1-solution.js
+const solutionFile = path.join(basePath, '1-solution.js');
 fs.writeFileSync(
-    path.join(basePath, '1-solution.js'),
+    solutionFile,
     `import { runTest } from "../index.js";\n\n`
 );
 
@@ -60,3 +65,17 @@ fs.writeFileSync(
 );
 
 console.log(`✅ Added problem: "${problemName}"`);
+
+// 🖥️ Try opening in VS Code first, otherwise default editor
+exec(`code "${solutionFile}"`, (err) => {
+    if (err) {
+        console.warn("⚠️ VS Code not found, opening in default editor...");
+        const openCommand =
+            process.platform === 'win32'
+                ? `start "" "${solutionFile}"`
+                : process.platform === 'darwin'
+                ? `open "${solutionFile}"`
+                : `xdg-open "${solutionFile}"`;
+        exec(openCommand);
+    }
+});
