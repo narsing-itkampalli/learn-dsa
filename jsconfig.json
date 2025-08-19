@@ -6,6 +6,12 @@
         "paths": {
             "*": [
                 "./*"
+            ],
+            "#data-structures/*": [
+                "./data-structures/*"
+            ],
+            "#problems/*": [
+                "./problems/*"
             ]
         }
     },
