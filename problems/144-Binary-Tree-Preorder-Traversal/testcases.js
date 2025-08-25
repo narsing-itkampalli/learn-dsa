@@ -1,4 +1,4 @@
-import BinaryTree from "../../data-structures/tree/binary-tree-leetcode.js";
+import BinaryTree from "../../data-structures/tree/binary-tree.js";
 
 export default [
     {
