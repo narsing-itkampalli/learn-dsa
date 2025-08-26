@@ -10,6 +10,8 @@ bst.insertNode(17)
 bst.insertNode(25)
 bst.insertNode(19)
 
+bst.removeNode(10, bst);
+
 console.log(bst);
 
 console.log(bst.findNode(100));

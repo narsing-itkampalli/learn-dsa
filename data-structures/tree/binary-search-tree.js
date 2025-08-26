@@ -1,24 +1,47 @@
 export default class BinarySearchTree {
     constructor(val) {
         this.val = val;
-        this.leftChild = null;
-        this.rightChild = null;
+        this.left = null;
+        this.right = null;
     }
 
     insertNode(val) {
         if (val < this.val) {
-            if (this.leftChild) this.leftChild.insertNode(val);
-            else this.leftChild = new BinarySearchTree(val);
+            if (this.left) this.left.insertNode(val);
+            else this.left = new BinarySearchTree(val);
         } else if (val > this.val) {
-            if (this.rightChild) this.rightChild.insertNode(val);
-            else this.rightChild = new BinarySearchTree(val);
+            if (this.right) this.right.insertNode(val);
+            else this.right = new BinarySearchTree(val);
         }
     }
 
     findNode(val) {
-        if(val < this.val && this.leftChild) return this.leftChild.findNode(val);
-        else if(val > this.val && this.rightChild) return this.rightChild.findNode(val);
+        if(val < this.val && this.left) return this.left.findNode(val);
+        else if(val > this.val && this.right) return this.right.findNode(val);
 
         return val === this.val;
+    }
+
+    removeNode(val, parent) {
+        if(val < this.val && this.left) return this.left.removeNode(val, this);
+        if(val < this.val) return false;
+        if(val > this.val && this.right) return this.right.removeNode(val, this);
+        if(val > this.val) return false;
+        if(this.left === null && this.right === null) {
+            if(this === parent.left) parent.left = null;
+            if(this === parent.right) parent.right = null;
+        }else if(this.left === null && this.right !== null) {
+            this.parent = this.right;
+        }else if (this.right === null && this.left !== null) {
+            this.parent = this.left;
+        }else {
+            this.val = this.right.findMinimumValue();
+            this.right.removeNode(this.val, this);
+        }
+    }
+
+    findMinimumValue() {
+        if(this.left) return this.left.findMinimum();
+        return this.val;
     }
 }
