@@ -1,9 +1,11 @@
 import LinkedList from "./linked-list.js";
 
 export default class Queue {
-    constructor() {
+    constructor(...values) {
         this.store = null;
         this.tail = null;
+
+        values.forEach(value => this.put(value));
     }
 
     put(val) {
