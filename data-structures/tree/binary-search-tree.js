@@ -19,7 +19,11 @@ export default class BinarySearchTree {
         if(val < this.val && this.left) return this.left.findNode(val);
         else if(val > this.val && this.right) return this.right.findNode(val);
 
-        return val === this.val;
+        return val === this.val ? this : null;
+    }
+
+    hasNode(val) {
+        return Boolean(this.findNode(val));
     }
 
     removeNode(val, parent) {
@@ -30,10 +34,13 @@ export default class BinarySearchTree {
         if(this.left === null && this.right === null) {
             if(this === parent.left) parent.left = null;
             if(this === parent.right) parent.right = null;
+            this.clearNode();
         }else if(this.left === null && this.right !== null) {
             this.parent = this.right;
+            this.clearNode();
         }else if (this.right === null && this.left !== null) {
             this.parent = this.left;
+            this.clearNode();
         }else {
             this.val = this.right.findMinimumValue();
             this.right.removeNode(this.val, this);
@@ -44,4 +51,12 @@ export default class BinarySearchTree {
         if(this.left) return this.left.findMinimum();
         return this.val;
     }
+
+    clearNode() {
+        this.val = null;
+        this.left = null;
+        this.right = null;
+    }
+
+    
 }
