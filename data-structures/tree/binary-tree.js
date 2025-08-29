@@ -52,8 +52,7 @@ export default class BinaryTree {
 
     bfs() {
         const output = [];
-        const queue = new Queue();
-        queue.put(this);
+        const queue = new Queue(this);
 
         while (!queue.isEmpty()) {
             const currentNode = queue.get();
@@ -69,24 +68,24 @@ export default class BinaryTree {
     static fromArray(arr) {
         if (!arr.length) return null;
 
-        let root = new BinaryTree(arr[0]);
-        let queue = [root];
+        const root = new BinaryTree(arr[0]);
+        const queue = new Queue(root);
         let i = 1;
 
-        while (queue.length && i < arr.length) {
-            let current = queue.shift();
+        while (!queue.isEmpty() && i < arr.length) {
+            const current = queue.get();
 
             // Left child
             if (i < arr.length && arr[i] !== null) {
                 current.left = new BinaryTree(arr[i]);
-                queue.push(current.left);
+                queue.put(current.left);
             }
             i++;
 
             // Right child
             if (i < arr.length && arr[i] !== null) {
                 current.right = new BinaryTree(arr[i]);
-                queue.push(current.right);
+                queue.put(current.right);
             }
             i++;
         }
@@ -97,26 +96,26 @@ export default class BinaryTree {
     static toArray(root) {
         if (!root) return [];
 
-        let result = [];
-        let queue = [root];
+        const output = [];
+        const queue = new Queue(root);
 
-        while (queue.length) {
-            let node = queue.shift();
+        while (!queue.isEmpty()) {
+            const node = queue.get();
 
             if (node) {
-                result.push(node.val);
-                queue.push(node.left);
-                queue.push(node.right);
+                output.push(node.val);
+                queue.put(node.left);
+                queue.put(node.right);
             } else {
-                result.push(null);
+                output.push(null);
             }
         }
 
         // Trim trailing nulls (not needed in array representation)
-        while (result[result.length - 1] === null) {
-            result.pop();
+        while (output[output.length - 1] === null) {
+            output.pop();
         }
 
-        return result;
+        return output;
     }
 }
