@@ -17,4 +17,7 @@ console.log(bst.findNode(19));
 
 console.log(bst);
 
-console.log(BinarySearchTree.toArray(bst));
+const bstArr = BinarySearchTree.toArray(bst);
+
+console.log(bstArr);
+console.log(BinarySearchTree.fromArray(bstArr));

@@ -60,6 +60,32 @@ export default class BinarySearchTree {
         this.right = null;
     }
 
+    static fromArray(arr) {
+        if(!arr.length) return null;
+
+        const root = new BinarySearchTree(arr[0]);
+        const queue = new Queue(root);
+        let i = 1;
+
+        while(!queue.isEmpty() && i < arr.length) {
+            const node = queue.get();
+
+            if(arr[i] !== null) {
+                node.left = new BinarySearchTree(arr[i]);
+                queue.put(node.left);
+            }
+            i++;
+
+            if(i < arr.length && arr[i] !== null) {
+                node.right = new BinarySearchTree(arr[i]);
+                queue.put(node.right);
+            }
+            i++;
+        }
+
+        return root;
+    }
+
     static toArray(root) {
         if(!root) return [];
 
