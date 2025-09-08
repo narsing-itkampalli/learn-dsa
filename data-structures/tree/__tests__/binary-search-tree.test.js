@@ -12,7 +12,9 @@ bst.insertNode(19)
 
 bst.removeNode(10, bst);
 
-console.log(bst);
-
 console.log(bst.findNode(100));
 console.log(bst.findNode(19));
+
+console.log(bst);
+
+console.log(BinarySearchTree.toArray(bst));

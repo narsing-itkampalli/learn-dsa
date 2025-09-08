@@ -1,3 +1,5 @@
+import Queue from "../queue.js";
+
 export default class BinarySearchTree {
     constructor(val) {
         this.val = val;
@@ -16,8 +18,8 @@ export default class BinarySearchTree {
     }
 
     findNode(val) {
-        if(val < this.val && this.left) return this.left.findNode(val);
-        else if(val > this.val && this.right) return this.right.findNode(val);
+        if (val < this.val && this.left) return this.left.findNode(val);
+        else if (val > this.val && this.right) return this.right.findNode(val);
 
         return val === this.val ? this : null;
     }
@@ -27,28 +29,28 @@ export default class BinarySearchTree {
     }
 
     removeNode(val, parent) {
-        if(val < this.val && this.left) return this.left.removeNode(val, this);
-        if(val < this.val) return false;
-        if(val > this.val && this.right) return this.right.removeNode(val, this);
-        if(val > this.val) return false;
-        if(this.left === null && this.right === null) {
-            if(this === parent.left) parent.left = null;
-            if(this === parent.right) parent.right = null;
+        if (val < this.val && this.left) return this.left.removeNode(val, this);
+        if (val < this.val) return false;
+        if (val > this.val && this.right) return this.right.removeNode(val, this);
+        if (val > this.val) return false;
+        if (this.left === null && this.right === null) {
+            if (this === parent.left) parent.left = null;
+            if (this === parent.right) parent.right = null;
             this.clearNode();
-        }else if(this.left === null && this.right !== null) {
+        } else if (this.left === null && this.right !== null) {
             this.parent = this.right;
             this.clearNode();
-        }else if (this.right === null && this.left !== null) {
+        } else if (this.right === null && this.left !== null) {
             this.parent = this.left;
             this.clearNode();
-        }else {
+        } else {
             this.val = this.right.findMinimumValue();
             this.right.removeNode(this.val, this);
         }
     }
 
     findMinimumValue() {
-        if(this.left) return this.left.findMinimum();
+        if (this.left) return this.left.findMinimum();
         return this.val;
     }
 
@@ -58,5 +60,26 @@ export default class BinarySearchTree {
         this.right = null;
     }
 
-    
+    static toArray(root) {
+        if(!root) return [];
+
+        const output = [];
+        const queue = new Queue(root);
+
+        while(!queue.isEmpty()) {
+            const node = queue.get();
+
+            if(node) {
+                output.push(node.val);
+                queue.put(node.left);
+                queue.put(node.right);
+            }else {
+                output.push(null);
+            }
+        }
+
+        while(output[output.length - 1] === null) output.pop();
+
+        return output;
+    }
 }
